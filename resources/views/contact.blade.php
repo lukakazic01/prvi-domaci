@@ -6,20 +6,20 @@
     </div>
     <div class="flex justify-center gap-6 mt-10">
         <form class="max-w-150 w-full border border-gray-200 rounded flex flex-col gap-4 p-4">
-           <div class="flex flex-col gap-2">
+           <x-forms.field required class="flex flex-col gap-2">
               <x-forms.label for="email">Email</x-forms.label>
               <x-forms.input name="email" />
-           </div>
-            <div class="flex flex-col gap-2">
+           </x-forms.field>
+            <x-forms.field required class="flex flex-col gap-2">
                 <x-forms.label for="subject">Subject</x-forms.label>
                 <x-forms.input name="subject" />
-            </div>
-            <div class="flex flex-col gap-2">
+            </x-forms.field>
+            <x-forms.field required class="flex flex-col gap-2">
                 <x-forms.label for="message">Message</x-forms.label>
                 <x-forms.input name="message" />
-            </div>
+            </x-forms.field>
             <div class="grow items-end w-full flex">
-                <x-base.button>Submit</x-base.button>
+                <x-base.button type="submit">Submit</x-base.button>
             </div>
         </form>
         <iframe class="rounded" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5667.272082066414!2d20.44864654860883!3d44.747441654099255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7198ad2f465f%3A0x7e09b29e2552c67!2sMiljakovac%2C%20Belgrade!5e0!3m2!1sen!2srs!4v1782321588185!5m2!1sen!2srs" width="600" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>

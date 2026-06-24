@@ -1,6 +1,9 @@
+@aware(['required' => false])
+
 <input
     name="{{ $name }}"
     id="{{ $name }}"
+    required="{{ $required }}"
     {{ $attributes
         ->merge(['type' => 'text'])
         ->class([

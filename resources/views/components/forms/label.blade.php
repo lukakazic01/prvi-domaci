@@ -1,4 +1,5 @@
+@aware(['required' => false])
 
 <label for="{{ $for }}">
-    {{ $slot }}
+    {{ $slot }} @if($required) <span class="text-red-500">*</span> @endif
 </label>
