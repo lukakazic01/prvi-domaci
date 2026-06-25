@@ -3,7 +3,6 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
-use App\Models\ShopItem;
 use Illuminate\Support\Facades\Route;
 
 
