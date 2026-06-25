@@ -1,5 +1,12 @@
 <x-layout>
     <x-slot:title>Contact</x-slot:title>
+    @if ($hour >= 0 && $hour <= 12)
+        <p>Good morning!</p>
+    @else
+        <p>Good afternoon!</p>
+    @endif
+    <p>Current hour's: {{ $hour }}h</p>
+    <p>Current time is: {{ $currentTime }}</p>
     <div class="flex flex-col gap-2 items-center mt-6">
         <p class="font-bold text-gray-700 text-2xl">You have a question?</p>
         <p class="font-semibold text-gray-700 text-xl">We are here for all your doubts :)</p>

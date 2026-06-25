@@ -9,7 +9,6 @@
 <body>
     <x-navigation />
         <div class="p-4">
-            <p>Trenutno vreme je: {{ now("Europe/Belgrade")->format("H:i:s") }}
             {{ $slot }}
         </div>
     <x-footer />
