@@ -11,6 +11,8 @@ Route::view('/about', 'about')->name('about');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'], )->name('shop');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/send-contact', [ContactController::class, 'sendContact']);
+
 Route::prefix('/admin')->group(function(){
     Route::get('/all-contacts', [ContactController::class, 'allContacts'])->name('allContacts');
 });

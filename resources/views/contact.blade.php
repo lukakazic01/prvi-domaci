@@ -13,17 +13,17 @@
     </div>
     <div class="flex justify-center gap-6 mt-10">
         <form class="max-w-150 w-full border border-gray-200 rounded flex flex-col gap-4 p-4">
-           <x-forms.field required class="flex flex-col gap-2">
-              <x-forms.label for="email">Email</x-forms.label>
-              <x-forms.input name="email" />
+           <x-forms.field name="email" required class="flex flex-col gap-2">
+              <x-forms.label>Email</x-forms.label>
+              <x-forms.input />
            </x-forms.field>
-            <x-forms.field required class="flex flex-col gap-2">
-                <x-forms.label for="subject">Subject</x-forms.label>
-                <x-forms.input name="subject" />
+            <x-forms.field name="subject" required class="flex flex-col gap-2">
+                <x-forms.label>Subject</x-forms.label>
+                <x-forms.input />
             </x-forms.field>
-            <x-forms.field required class="flex flex-col gap-2">
-                <x-forms.label for="message">Message</x-forms.label>
-                <x-forms.input name="message" />
+            <x-forms.field name="message" required class="flex flex-col gap-2">
+                <x-forms.label>Message</x-forms.label>
+                <x-forms.input />
             </x-forms.field>
             <div class="grow items-end w-full flex">
                 <x-base.button type="submit">Submit</x-base.button>

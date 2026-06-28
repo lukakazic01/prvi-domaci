@@ -9,6 +9,8 @@ use Illuminate\View\Component;
 class Field extends Component
 {
     public function __construct(
+        public string $name,
+        public string $errorKey = '',
         public bool $required = false
     ){}
 
