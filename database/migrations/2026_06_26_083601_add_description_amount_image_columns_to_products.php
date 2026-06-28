@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->text('description')->nullable()->after('name');
-            $table->float('price')->nullable()->after('description');
+            $table->float('price')->nullable()->after('description')->change();
             $table->unsignedInteger('amount')->nullable()->after('price');
             $table->string('image')->nullable()->after('amount');
         });

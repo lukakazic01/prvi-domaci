@@ -11,7 +11,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col gap-1">
                             <p class="text-gray-800 font-medium">{{ $product->name }}</p>
-                            @if (str_starts_with($product->name, 'Iphone'))
+                            @if (str_starts_with($product->name, 'iPhone'))
                                 <span class="text-xs font-semibold text-white bg-red-500 px-2 py-0.5 rounded-full">
                                     SUPER DISCOUNT 🔥
                                 </span>
