@@ -8,7 +8,7 @@
 <title>{{ $title ?? 'App' }}</title>
 <body>
     <x-navigation />
-        <div class="p-4">
+        <div class="p-4 pb-30">
             {{ $slot }}
         </div>
     <x-footer />
