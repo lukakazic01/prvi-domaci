@@ -48,7 +48,7 @@
                         <td colspan="8" class="px-2 py-3">
                             <x-base.notification class="text-center">
                                 Sorry, but there are no products to show,
-                                <a href="{{ route('admin.addProduct') }}" class="text-blue-500 underline">add one</a> 😃
+                                <x-link href="{{ route('admin.addProduct') }}" class="text-blue-500 underline">add one</x-link> 😃
                             </x-base.notification>
                         </td>
                     </tr>
