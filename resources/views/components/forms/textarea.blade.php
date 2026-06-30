@@ -3,7 +3,7 @@
 <textarea
     name="{{ $name }}"
     id="{{ $name }}"
-    required="{{ $required }}"
+    {{ $required ? 'required' : '' }}
     {{ $attributes
         ->class([
             'w-full border border-gray-200 outline-none rounded px-4 py-2 resize-none',
@@ -12,4 +12,4 @@
         ])
         ->merge(['rows' => 3])
     }}
-></textarea>
+>{{ $value ?? '' }}</textarea>

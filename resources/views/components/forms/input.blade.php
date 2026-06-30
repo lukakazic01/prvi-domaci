@@ -3,7 +3,8 @@
 <input
     name="{{ $name }}"
     id="{{ $name }}"
-    required="{{ $required }}"
+    value="{{ $value }}"
+    {{ $required ? 'required' : '' }}
     {{ $attributes
         ->merge(['type' => 'text'])
         ->class([

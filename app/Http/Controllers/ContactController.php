@@ -36,6 +36,6 @@ class ContactController extends Controller
             'message' => $request->input('message'),
         ]);
 
-        return redirect('/shop');
+        return redirect()->route('admin.allContacts');
     }
 }

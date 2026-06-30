@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function storeProduct(Request $request) {
         $request->validate([
-            'name' => 'required|min:3|max:255',
+            'name' => 'required|unique:products|min:3|max:255',
             'description' => 'required|min:3|max:255',
             'price' => 'required|gt:0|decimal:2|max:99999',
             'amount' => 'required|integer|gt:0|max_digits:10',
@@ -43,6 +43,6 @@ class ProductController extends Controller
             'image' => $path,
         ]);
 
-        return redirect('/admin/products');
+        return redirect()->route('admin.allProducts');
     }
 }

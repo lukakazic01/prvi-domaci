@@ -36,7 +36,7 @@
                         <td colspan="5" class="px-2 py-3">
                             <x-base.notification class="text-center">
                                 Sorry, but there are no contacts to show,
-                                <a href="{{ route('home') }}" class="text-blue-500 underline">add one</a> 😃
+                                <x-link :href="route('home')" class="text-blue-500 underline">add one</x-link> 😃
                             </x-base.notification>
                         </td>
                     </tr>

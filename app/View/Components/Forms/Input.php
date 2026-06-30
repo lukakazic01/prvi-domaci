@@ -8,7 +8,9 @@ use Illuminate\View\Component;
 
 class Input extends Component
 {
-    public function __construct(){}
+    public function __construct(
+        public ?string $value = '',
+    ){}
 
     public function render(): View|Closure|string
     {
