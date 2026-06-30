@@ -30,9 +30,17 @@
                         <td class="px-2 py-3 font-medium text-blue-600">${{ $product->price }}</td>
                         <td class="px-2 py-3">{{ $product->amount }}</td>
                         <td class="px-2 py-3 text-gray-400 hidden md:table-cell">{{ !empty($product->created_at) ? $product->created_at->format('d/m/Y') : '' }}</td>
-                        <td class="px-2 py-3 flex gap-2">
-                            <x-base.button class="px-0! py-0! bg-yellow-200 border border-yellow-400 text-gray-900!">Edit</x-base.button>
-                            <x-base.button class="px-0! py-0! bg-red-200 border border-red-400 text-gray-900!">Delete</x-base.button>
+                        <td class="px-2 py-3">
+                            <div class="flex gap-2 items-center justify-center">
+                                <x-base.button class="px-0! py-0! bg-yellow-200 border border-yellow-400 text-gray-900!">Edit</x-base.button>
+                                <form class="w-full" action="{{ route('admin.products.delete', $product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-base.button type="submit" class="px-0! py-0! bg-red-200 border border-red-400 text-gray-900!">
+                                        Delete
+                                    </x-base.button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty

@@ -14,11 +14,16 @@ class ProductController extends Controller
 
     public function showProductsForAdmin() {
         $products = Product::all();
-        return view('admin.products', ['products' => $products]);
+        return view('admin.allProducts', ['products' => $products]);
     }
 
     public function addProduct() {
         return view('admin.addProduct');
+    }
+
+    public function delete(Product $product) {
+        $product->delete();
+        return redirect()->back();
     }
 
     public function storeProduct(Request $request) {
