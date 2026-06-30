@@ -8,7 +8,7 @@
                 <p class="text-lg">😔 No products in stock right now.</p>
             </div>
         @endforelse
-        <form action="/send-contact" method="post" class="w-full border border-gray-200 rounded flex flex-col gap-4 p-4">
+        <form action="{{ route('sendContact') }}" method="POST" class="w-full border border-gray-200 rounded flex flex-col gap-4 p-4">
             @csrf
             <x-forms.field required name="email" class="flex flex-col gap-2">
                 <x-forms.label>Email</x-forms.label>

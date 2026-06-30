@@ -31,7 +31,7 @@
                         <td class="px-2 py-3">{{ $product->amount }}</td>
                         <td class="px-2 py-3 text-gray-400 hidden md:table-cell">{{ !empty($product->created_at) ? $product->created_at->format('d/m/Y') : '' }}</td>
                         <td class="px-2 py-3">
-                            <div class="flex gap-2 items-center justify-center">
+                            <div class="flex md:flex-row flex-col gap-2 items-center justify-center">
                                 <x-base.button class="px-0! py-0! bg-yellow-200 border border-yellow-400 text-gray-900!">Edit</x-base.button>
                                 <form class="w-full" action="{{ route('admin.products.delete', $product->id) }}" method="POST">
                                     @csrf
@@ -46,7 +46,10 @@
                 @empty
                     <tr>
                         <td colspan="8" class="px-2 py-3">
-                            <x-base.notification class="text-center">Sorry, but there are no products to show, add one 😃</x-base.notification>
+                            <x-base.notification class="text-center">
+                                Sorry, but there are no products to show,
+                                <a href="{{ route('admin.addProduct') }}" class="text-blue-500 underline">add one</a> 😃
+                            </x-base.notification>
                         </td>
                     </tr>
                 @endforelse

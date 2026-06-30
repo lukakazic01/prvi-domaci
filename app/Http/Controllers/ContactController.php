@@ -13,6 +13,11 @@ class ContactController extends Controller
         return view('contact', compact('hour', 'currentTime'));
     }
 
+    public function delete(ContactModel $contact) {
+        $contact->delete();
+        return redirect()->back();
+    }
+
     public function allContacts() {
         $contacts = ContactModel::all();
         return view('admin.allContacts', compact('contacts'));
