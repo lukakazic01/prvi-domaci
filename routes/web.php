@@ -18,6 +18,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/all-contacts', [ContactController::class, 'allContacts'])->name('admin.allContacts');
     Route::get('/add-product', [ProductController::class, 'addProduct'])->name('admin.addProduct');
     Route::get('/all-products', [ProductController::class, 'showProductsForAdmin'])->name('admin.allProducts');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('admin.editProduct');
     Route::post('/store-product', [ProductController::class, 'storeProduct'])->name('admin.storeProduct');
     Route::delete('/delete-product/{product}', [ProductController::class, 'delete'])->name('admin.products.delete');
+    Route::patch('/update-product/{product}', [ProductController::class, 'update'])->name('admin.products.update');
 });

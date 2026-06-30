@@ -32,7 +32,9 @@
                         <td class="px-2 py-3 text-gray-400 hidden md:table-cell">{{ !empty($product->created_at) ? $product->created_at->format('d/m/Y') : '' }}</td>
                         <td class="px-2 py-3">
                             <div class="flex md:flex-row flex-col gap-2 items-center justify-center">
-                                <x-base.button class="px-0! py-0! bg-yellow-200 border border-yellow-400 text-gray-900!">Edit</x-base.button>
+                                <x-link href="{{ route('admin.editProduct', $product->id) }}" class="px-0! py-0! w-full text-center bg-yellow-200 border border-yellow-400 text-gray-900!">
+                                    Edit
+                                </x-link>
                                 <form class="w-full" action="{{ route('admin.products.delete', $product->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

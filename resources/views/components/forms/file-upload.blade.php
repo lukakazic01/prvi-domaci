@@ -4,7 +4,7 @@
     name="{{ $name }}"
     id="{{ $name }}"
     type="file"
-    required="{{ $required }}"
+    {{ $required ? 'required' : '' }}
     {{ $attributes
         ->class([
             'w-full border border-gray-200 rounded px-4 py-2',

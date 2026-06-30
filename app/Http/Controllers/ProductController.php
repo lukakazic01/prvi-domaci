@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -26,14 +26,7 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function storeProduct(Request $request) {
-        $request->validate([
-            'name' => 'required|unique:products|min:3|max:255',
-            'description' => 'required|min:3|max:255',
-            'price' => 'required|gt:0|decimal:2|max:99999',
-            'amount' => 'required|integer|gt:0|max_digits:10',
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp,avif|max:2048',
-        ]);
+    public function storeProduct(ProductRequest $request) {
         $path = $request->file('image')->store('uploads', 'public');
         Product::query()->create([
             'name' => $request->input('name'),
@@ -42,7 +35,25 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'image' => $path,
         ]);
+        return redirect()->route('admin.allProducts');
+    }
 
+    public function edit(Product $product) {
+        return view('admin.editProduct', compact('product'));
+    }
+
+    public function update(Product $product, ProductRequest $request) {
+        $path = null;
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('uploads', 'public');
+        }
+        $product->update([
+            'name' => $request->input('name') ?: $product->name,
+            'price' => $request->input('price') ?: $product->price,
+            'amount' => $request->input('amount') ?: $product->amount,
+            'description' => $request->input('description') ?: $product->description,
+            'image' => $path ?: $product->image,
+        ]);
         return redirect()->route('admin.allProducts');
     }
 }
