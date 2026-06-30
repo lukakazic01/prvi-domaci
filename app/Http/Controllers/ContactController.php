@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\ContactModel;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
@@ -23,19 +23,25 @@ class ContactController extends Controller
         return view('admin.allContacts', compact('contacts'));
     }
 
-    public function sendContact(Request $request) {
-        $request->validate([
-            'email' => 'required|string|email',
-            'subject' => 'required|string|min:5',
-            'message' => 'required|string|min:5',
-        ]);
-
+    public function sendContact(ContactRequest $request) {
         ContactModel::query()->create([
             'email' => $request->input('email'),
             'subject' => $request->input('subject'),
             'message' => $request->input('message'),
         ]);
 
+        return redirect()->route('admin.allContacts');
+    }
+
+    public function edit(ContactModel $contact) {
+        return view('admin.editContact', compact('contact'));
+    }
+    public function update(ContactRequest $request, ContactModel $contact) {
+        $contact->update([
+            'email' => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+        ]);
         return redirect()->route('admin.allContacts');
     }
 }

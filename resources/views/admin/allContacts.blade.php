@@ -20,7 +20,7 @@
                         <td class="px-2 py-3 font-medium text-blue-600 hidden md:table-cell truncate max-w-50">{{ $contact->message }}</td>
                         <td class="px-2 py-3">
                             <div class="flex md:flex-row flex-col gap-2 items-center justify-center">
-                                <x-base.button class="px-0! py-0! bg-yellow-200 border border-yellow-400 text-gray-900!">Edit</x-base.button>
+                                <x-link href="{{ route('admin.editContact', $contact->id) }}" class="px-0! py-0! w-full text-center bg-yellow-200 border border-yellow-400 text-gray-900!">Edit</x-link>
                                 <form class="w-full" action="{{ route('deleteContact', $contact->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

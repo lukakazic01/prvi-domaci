@@ -16,6 +16,9 @@ Route::delete('/delete-contact/{contact}', [ContactController::class, 'delete'])
 
 Route::prefix('/admin')->group(function(){
     Route::get('/all-contacts', [ContactController::class, 'allContacts'])->name('admin.allContacts');
+    Route::get('/contact/{contact}/edit', [ContactController::class, 'edit'])->name('admin.editContact');
+    Route::patch('/contact/{contact}', [ContactController::class, 'update'])->name('admin.updateContact');
+
     Route::get('/add-product', [ProductController::class, 'addProduct'])->name('admin.addProduct');
     Route::get('/all-products', [ProductController::class, 'showProductsForAdmin'])->name('admin.allProducts');
     Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('admin.editProduct');
