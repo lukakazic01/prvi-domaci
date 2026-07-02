@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:title>Register page</x-slot:title>
+    <x-slot:title>Login page</x-slot:title>
     <div class="container mx-auto">
         <form action="{{ route('login.store') }}" method="POST" class="w-full border mt-2 border-gray-200 rounded flex flex-col gap-4 p-4">
             @csrf
