@@ -13,14 +13,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/shop', [ProductController::class, 'index'], )->name('shop');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('sendContact');
     Route::delete('/delete-contact/{contact}', [ContactController::class, 'delete'])->name('deleteContact')->whereNumber('contact');
 });
 
-Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/all-contacts', [ContactController::class, 'allContacts'])->name('allContacts');
     Route::get('/contact/{contact}/edit', [ContactController::class, 'edit'])->name('editContact')->whereNumber('contact');
+    Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('sendContact');
     Route::patch('/contact/{contact}', [ContactController::class, 'update'])->name('updateContact')->whereNumber('contact');
 
     Route::get('/add-product', [ProductController::class, 'addProduct'])->name('addProduct');

@@ -12,7 +12,7 @@
         <p class="font-semibold text-gray-700 text-xl">We are here for all your doubts :)</p>
     </div>
     <div class="flex justify-center gap-6 mt-10">
-        <form action="{{ route('sendContact') }}" method="POST" class="max-w-150 w-full border border-gray-200 rounded flex flex-col gap-4 p-4">
+        <form action="{{ route('admin.sendContact') }}" method="POST" class="max-w-150 w-full border border-gray-200 rounded flex flex-col gap-4 p-4">
             @csrf
             <x-forms.field required name="email" class="flex flex-col gap-2">
                 <x-forms.label>Email</x-forms.label>
