@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\ExchangeRateService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
@@ -11,18 +12,17 @@ use Illuminate\Support\Facades\Http;
 #[Description('Command description')]
 class ExchangeRate extends Command
 {
+    public function __construct(
+       private readonly ExchangeRateService $exchangeRateService
+    ) {
+        parent::__construct();
+    }
 
-    public function handle()
+    public function handle(): void
     {
         [$eurResponse, $usdResponse] = Http::pool(fn ($pool) => [
-            $pool->withOptions(['verify' => false])->get(env('EXCHANGE_RATE_API').'/v2/rates', [
-                'base' => 'EUR',
-                'quotes' => 'USD,RSD',
-            ]),
-            $pool->withOptions(['verify' => false])->get(env('EXCHANGE_RATE_API').'/v2/rates', [
-                'base' => 'USD',
-                'quotes' => 'EUR,RSD',
-            ]),
+            $this->exchangeRateService->getRates("EUR", "RSD,USD", $pool),
+            $this->exchangeRateService->getRates("USD", "RSD,EUR", $pool),
         ]);
         $statusEur = $eurResponse->getStatusCode() ?? 200;
         $statusUsd = $usdResponse->getStatusCode() ?? 200;
