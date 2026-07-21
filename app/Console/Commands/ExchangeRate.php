@@ -2,37 +2,32 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ExchangeRates;
 use App\Services\ExchangeRateService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
-#[Signature('money:exchange-rate')]
+#[Signature('currency:exchange-rates')]
 #[Description('Command description')]
 class ExchangeRate extends Command
 {
 
     public function handle(ExchangeRateService $exchangeRateService): void
     {
-        [$eurResponse, $usdResponse] = Http::pool(fn ($pool) => [
-            $exchangeRateService->getRates("EUR", "RSD,USD", $pool),
-            $exchangeRateService->getRates("USD", "RSD,EUR", $pool),
-        ]);
-        $statusEur = $eurResponse->getStatusCode() ?? 200;
-        $statusUsd = $usdResponse->getStatusCode() ?? 200;
-        if ($statusEur >= 400) {
-            $this->getOutput()->error("Status: $statusEur \nMessage: {$eurResponse["message"]} \nApi: EUR exchange rate");
-            return;
+        $currencies = ["eur", "usd", "rub"];
+        foreach ($currencies as $currency) {
+            $data = $exchangeRateService->getRates($currency, Http::getFacadeRoot());
+            $doesCurrencyForTodayExists = ExchangeRates::query()
+                ->where(["currency" => "eur"])
+                ->whereDate("created_at", now())
+                ->exists();
+            if ($doesCurrencyForTodayExists) continue;
+            ExchangeRates::query()->create([
+                "currency" => $currency,
+                "value" => $data->json()["exchange_middle"]
+            ]);
         }
-        if ($statusUsd >= 400) {
-            $this->getOutput()->error("Status: $statusUsd \nMessage: {$usdResponse["message"]} \nApi: USD exchange rate");
-            return;
-        }
-        $this->getOutput()->success("EUR exchange rates :)");
-        dump($eurResponse->json());
-        $this->newLine();
-        $this->getOutput()->success("USD exchange rates :)");
-        dd($usdResponse->json());
     }
 }
