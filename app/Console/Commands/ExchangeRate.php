@@ -12,17 +12,12 @@ use Illuminate\Support\Facades\Http;
 #[Description('Command description')]
 class ExchangeRate extends Command
 {
-    public function __construct(
-       private readonly ExchangeRateService $exchangeRateService
-    ) {
-        parent::__construct();
-    }
 
-    public function handle(): void
+    public function handle(ExchangeRateService $exchangeRateService): void
     {
         [$eurResponse, $usdResponse] = Http::pool(fn ($pool) => [
-            $this->exchangeRateService->getRates("EUR", "RSD,USD", $pool),
-            $this->exchangeRateService->getRates("USD", "RSD,EUR", $pool),
+            $exchangeRateService->getRates("EUR", "RSD,USD", $pool),
+            $exchangeRateService->getRates("USD", "RSD,EUR", $pool),
         ]);
         $statusEur = $eurResponse->getStatusCode() ?? 200;
         $statusUsd = $usdResponse->getStatusCode() ?? 200;
