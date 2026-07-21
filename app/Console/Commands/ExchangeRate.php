@@ -16,14 +16,10 @@ class ExchangeRate extends Command
 
     public function handle(ExchangeRateService $exchangeRateService): void
     {
-        $currencies = ["eur", "usd", "rub"];
-        foreach ($currencies as $currency) {
+        foreach (ExchangeRates::AVAILABLE_CURRENCIES as $currency) {
             $data = $exchangeRateService->getRates($currency, Http::getFacadeRoot());
-            $doesCurrencyForTodayExists = ExchangeRates::query()
-                ->where(["currency" => "eur"])
-                ->whereDate("created_at", now())
-                ->exists();
-            if ($doesCurrencyForTodayExists) continue;
+            $todayCurrency = ExchangeRates::getTodayCurrency($currency);
+            if ($todayCurrency) continue;
             ExchangeRates::query()->create([
                 "currency" => $currency,
                 "value" => $data->json()["exchange_middle"]
