@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Models\ContactModel;
+use App\Repositories\ContactRepository;
 
 class ContactController extends Controller
 {
     public function index() {
-        $hour = (int) now('Europe/Belgrade')->format('H');
-        $currentTime = now('Europe/Belgrade')->format('H:i:s');
-        return view('contact', compact('hour', 'currentTime'));
+        return view('contact');
     }
 
     public function delete(ContactModel $contact) {
@@ -23,25 +22,16 @@ class ContactController extends Controller
         return view('admin.allContacts', compact('contacts'));
     }
 
-    public function sendContact(ContactRequest $request) {
-        ContactModel::query()->create([
-            'email' => $request->input('email'),
-            'subject' => $request->input('subject'),
-            'message' => $request->input('message'),
-        ]);
-
+    public function sendContact(ContactRepository $contactRepository, ContactRequest $request) {
+        $contactRepository->create($request);
         return redirect()->route('admin.allContacts');
     }
 
     public function edit(ContactModel $contact) {
         return view('admin.editContact', compact('contact'));
     }
-    public function update(ContactRequest $request, ContactModel $contact) {
-        $contact->update([
-            'email' => $request->input('email'),
-            'subject' => $request->input('subject'),
-            'message' => $request->input('message'),
-        ]);
+    public function update(ContactRequest $request, ContactModel $contact, ContactRepository $contactRepository) {
+        $contactRepository->update($request, $contact);
         return redirect()->route('admin.allContacts');
     }
 }
