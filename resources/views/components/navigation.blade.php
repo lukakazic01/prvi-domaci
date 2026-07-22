@@ -28,7 +28,7 @@
             @auth
                 @if (auth()->user()->role === 'admin')
                     <li>
-                        <x-link class="p-2 hover:bg-blue-400" :href="route('admin.allContacts')" :active="request()->routeIs('admin.allContacts')"
+                        <x-link class="p-2 hover:bg-blue-400" :href="route('admin.contacts.all')" :active="request()->routeIs('admin.allContacts')"
                                 active-class="bg-blue-500">
                             All Contacts
                         </x-link>

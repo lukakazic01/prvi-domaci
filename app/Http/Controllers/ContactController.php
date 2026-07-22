@@ -17,14 +17,14 @@ class ContactController extends Controller
         return redirect()->back();
     }
 
-    public function allContacts() {
+    public function all() {
         $contacts = ContactModel::all();
         return view('admin.allContacts', compact('contacts'));
     }
 
-    public function sendContact(ContactRepository $contactRepository, ContactRequest $request) {
+    public function store(ContactRepository $contactRepository, ContactRequest $request) {
         $contactRepository->create($request);
-        return redirect()->route('admin.allContacts');
+        return redirect()->route('admin.contacts.all');
     }
 
     public function edit(ContactModel $contact) {
@@ -32,6 +32,6 @@ class ContactController extends Controller
     }
     public function update(ContactRequest $request, ContactModel $contact, ContactRepository $contactRepository) {
         $contactRepository->update($request, $contact);
-        return redirect()->route('admin.allContacts');
+        return redirect()->route('admin.contacts.all');
     }
 }

@@ -4,7 +4,7 @@
         <p class="text-center font-bold text-2xl text-gray-600 mb-10 tracking-tight">
             Edit the information about the product here 😃
         </p>
-        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.updateContact', $contact->id) }}" class="flex flex-col gap-4">
+        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.contacts.update', $contact->id) }}" class="flex flex-col gap-4">
             @method('PATCH')
             @csrf
             <x-forms.field required name="email">

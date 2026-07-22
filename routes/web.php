@@ -17,12 +17,12 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::controller(ContactController::class)->prefix('/contact')->group(function () {
-        Route::get('/all', 'allContacts')->name('allContacts');
-        Route::get('/{contact}/edit', 'edit')->name('editContact')->whereNumber('contact');
-        Route::post('/send', 'sendContact')->name('sendContact');
-        Route::patch('/{contact}', 'update')->name('updateContact')->whereNumber('contact');
-        Route::delete('/delete/{contact}', 'delete')->name('deleteContact')->whereNumber('contact');
+    Route::controller(ContactController::class)->prefix('/contact')->name("contacts.")->group(function () {
+        Route::get('/all', 'all')->name('all');
+        Route::get('/{contact}/edit', 'edit')->name('edit')->whereNumber('contact');
+        Route::post('/store', 'store')->name('store');
+        Route::patch('/{contact}', 'update')->name('update')->whereNumber('contact');
+        Route::delete('/delete/{contact}', 'delete')->name('delete')->whereNumber('contact');
     });
 
     Route::controller(ProductController::class)->prefix('/products')->group(function () {
