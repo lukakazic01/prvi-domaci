@@ -25,7 +25,7 @@
             <form class="flex items-end gap-4 flex-col" method="POST" action="{{ route("cart.add") }}">
                 <input type="hidden" name="id" value="{{ $product->id }}">
                 <x-forms.field name="amount" class="w-full">
-                    <x-forms.input min="1" type="number" placeholder="Enter amount" />
+                    <x-forms.input type="number" placeholder="Enter amount" />
                     <x-forms.error-message />
                 </x-forms.field>
                 <x-base.button type="submit">Add to cart</x-base.button>
