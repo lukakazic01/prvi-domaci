@@ -10,11 +10,11 @@ class AdminProductController extends Controller
 {
     public function index() {
         $products = Product::all();
-        return view('admin.allProducts', ['products' => $products]);
+        return view('admin.products.all', ['products' => $products]);
     }
 
     public function add() {
-        return view('admin.addProduct');
+        return view('admin.products.add');
     }
 
     public function delete(Product $product) {
@@ -28,7 +28,7 @@ class AdminProductController extends Controller
     }
 
     public function edit(Product $product) {
-        return view('admin.editProduct', compact('product'));
+        return view('admin.products.edit', compact('product'));
     }
 
     public function update(Product $product, ProductRequest $request, ProductRepository $productRepository) {
