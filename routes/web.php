@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -25,9 +26,9 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
         Route::delete('/delete/{contact}', 'delete')->name('delete')->whereNumber('contact');
     });
 
-    Route::controller(ProductController::class)->prefix('/products')->name("products.")->group(function () {
+    Route::controller(AdminProductController::class)->prefix('/products')->name("products.")->group(function () {
         Route::get('/add', 'add')->name('add');
-        Route::get('/all', 'all')->name('all');
+        Route::get('/all', 'index')->name('all');
         Route::get('/{product}/edit', 'edit')->name('edit')->whereNumber('product');
         Route::post('/store', 'store')->name('store');
         Route::delete('/delete/{product}', 'delete')->name('delete')->whereNumber('product');
