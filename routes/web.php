@@ -17,20 +17,20 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::controller(ContactController::class)->group(function () {
-        Route::get('/all-contacts', 'allContacts')->name('allContacts');
-        Route::get('/contact/{contact}/edit', 'edit')->name('editContact')->whereNumber('contact');
-        Route::post('/send-contact', 'sendContact')->name('sendContact');
-        Route::patch('/contact/{contact}', 'update')->name('updateContact')->whereNumber('contact');
-        Route::delete('/delete-contact/{contact}', 'delete')->name('deleteContact')->whereNumber('contact');
+    Route::controller(ContactController::class)->prefix('/contact')->group(function () {
+        Route::get('/all', 'allContacts')->name('allContacts');
+        Route::get('/{contact}/edit', 'edit')->name('editContact')->whereNumber('contact');
+        Route::post('/send', 'sendContact')->name('sendContact');
+        Route::patch('/{contact}', 'update')->name('updateContact')->whereNumber('contact');
+        Route::delete('/delete/{contact}', 'delete')->name('deleteContact')->whereNumber('contact');
     });
 
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('/add-product', 'addProduct')->name('addProduct');
-        Route::get('/all-products', 'showProductsForAdmin')->name('allProducts');
-        Route::get('/product/{product}/edit', 'edit')->name('editProduct')->whereNumber('product');
-        Route::post('/store-product', 'storeProduct')->name('storeProduct');
-        Route::delete('/delete-product/{product}', 'delete')->name('products.delete')->whereNumber('product');
-        Route::patch('/update-product/{product}', 'update')->name('products.update')->whereNumber('product');
+    Route::controller(ProductController::class)->prefix('/product')->group(function () {
+        Route::get('/add', 'addProduct')->name('addProduct');
+        Route::get('/all', 'showProductsForAdmin')->name('allProducts');
+        Route::get('/{product}/edit', 'edit')->name('editProduct')->whereNumber('product');
+        Route::post('/store', 'storeProduct')->name('storeProduct');
+        Route::delete('/delete/{product}', 'delete')->name('products.delete')->whereNumber('product');
+        Route::patch('/update/{product}', 'update')->name('products.update')->whereNumber('product');
     });
 });
