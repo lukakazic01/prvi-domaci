@@ -13,7 +13,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/shop', [ProductController::class, 'index'], )->name('shop');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::delete('/delete-contact/{contact}', [ContactController::class, 'delete'])->name('deleteContact')->whereNumber('contact');
 });
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
@@ -23,6 +22,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
         Route::get('/contact/{contact}/edit', 'edit')->name('editContact')->whereNumber('contact');
         Route::post('/send-contact', 'sendContact')->name('sendContact');
         Route::patch('/contact/{contact}', 'update')->name('updateContact')->whereNumber('contact');
+        Route::delete('/delete-contact/{contact}', 'delete')->name('deleteContact')->whereNumber('contact');
     });
 
     Route::controller(ProductController::class)->group(function () {
