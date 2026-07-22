@@ -15,7 +15,7 @@ class AdminContactController extends Controller
 
     public function all() {
         $contacts = ContactModel::all();
-        return view('admin.allContacts', compact('contacts'));
+        return view('admin.contacts.all', compact('contacts'));
     }
 
     public function store(ContactRepository $contactRepository, ContactRequest $request) {
@@ -24,7 +24,7 @@ class AdminContactController extends Controller
     }
 
     public function edit(ContactModel $contact) {
-        return view('admin.editContact', compact('contact'));
+        return view('admin.contacts.edit', compact('contact'));
     }
 
     public function update(ContactRequest $request, ContactModel $contact, ContactRepository $contactRepository) {
