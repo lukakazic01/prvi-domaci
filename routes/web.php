@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::controller(ContactController::class)->prefix('/contact')->name("contacts.")->group(function () {
+    Route::controller(ContactController::class)->prefix('/contacts')->name("contacts.")->group(function () {
         Route::get('/all', 'all')->name('all');
         Route::get('/{contact}/edit', 'edit')->name('edit')->whereNumber('contact');
         Route::post('/store', 'store')->name('store');
@@ -25,12 +25,12 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
         Route::delete('/delete/{contact}', 'delete')->name('delete')->whereNumber('contact');
     });
 
-    Route::controller(ProductController::class)->prefix('/products')->group(function () {
-        Route::get('/add', 'addProduct')->name('addProduct');
-        Route::get('/all', 'showProductsForAdmin')->name('allProducts');
-        Route::get('/{product}/edit', 'edit')->name('editProduct')->whereNumber('product');
-        Route::post('/store', 'storeProduct')->name('storeProduct');
-        Route::delete('/delete/{product}', 'delete')->name('products.delete')->whereNumber('product');
-        Route::patch('/update/{product}', 'update')->name('products.update')->whereNumber('product');
+    Route::controller(ProductController::class)->prefix('/products')->name("products.")->group(function () {
+        Route::get('/add', 'add')->name('add');
+        Route::get('/all', 'all')->name('all');
+        Route::get('/{product}/edit', 'edit')->name('edit')->whereNumber('product');
+        Route::post('/store', 'store')->name('store');
+        Route::delete('/delete/{product}', 'delete')->name('delete')->whereNumber('product');
+        Route::patch('/update/{product}', 'update')->name('update')->whereNumber('product');
     });
 });

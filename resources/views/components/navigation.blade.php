@@ -28,13 +28,13 @@
             @auth
                 @if (auth()->user()->role === 'admin')
                     <li>
-                        <x-link class="p-2 hover:bg-blue-400" :href="route('admin.contacts.all')" :active="request()->routeIs('admin.allContacts')"
+                        <x-link class="p-2 hover:bg-blue-400" :href="route('admin.contacts.all')" :active="request()->routeIs('admin.contacts.all')"
                                 active-class="bg-blue-500">
                             All Contacts
                         </x-link>
                     </li>
                     <li>
-                        <x-link class="p-2 hover:bg-blue-400" :href="route('admin.allProducts')" :active="request()->routeIs('admin.allProducts')"
+                        <x-link class="p-2 hover:bg-blue-400" :href="route('admin.products.all')" :active="request()->routeIs('admin.products.all')"
                                 active-class="bg-blue-500">
                             All products
                         </x-link>

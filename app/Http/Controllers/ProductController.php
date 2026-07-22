@@ -13,12 +13,12 @@ class ProductController extends Controller
         return view('shop', ['products' => $products]);
     }
 
-    public function showProductsForAdmin() {
+    public function all() {
         $products = Product::all();
         return view('admin.allProducts', ['products' => $products]);
     }
 
-    public function addProduct() {
+    public function add() {
         return view('admin.addProduct');
     }
 
@@ -27,9 +27,9 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function storeProduct(ProductRequest $request, ProductRepository $productRepository) {
+    public function store(ProductRequest $request, ProductRepository $productRepository) {
         $productRepository->createNew($request);
-        return redirect()->route('admin.allProducts');
+        return redirect()->route('admin.products.all');
     }
 
     public function edit(Product $product) {
@@ -38,6 +38,6 @@ class ProductController extends Controller
 
     public function update(Product $product, ProductRequest $request, ProductRepository $productRepository) {
         $productRepository->update($request, $product);
-        return redirect()->route('admin.allProducts');
+        return redirect()->route('admin.products.all');
     }
 }

@@ -4,7 +4,7 @@
         <p class="text-center font-bold text-2xl text-gray-600 mb-10 tracking-tight">
             Ready to sell something? Insert your new product 😃
         </p>
-        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.storeProduct') }}" class="flex flex-col gap-4">
+        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.products.store') }}" class="flex flex-col gap-4">
             @csrf
             <x-forms.field required name="name">
                 <x-forms.label>Name of product</x-forms.label>
