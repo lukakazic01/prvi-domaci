@@ -16,6 +16,7 @@ Route::get('/shop', [ProductController::class, 'index'], )->name('shop');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.all');
 Route::post("/cart/add", [ShoppingCartController::class, 'add'])->name('cart.add');
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
