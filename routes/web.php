@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -18,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::controller(ContactController::class)->prefix('/contacts')->name("contacts.")->group(function () {
+    Route::controller(AdminContactController::class)->prefix('/contacts')->name("contacts.")->group(function () {
         Route::get('/all', 'all')->name('all');
         Route::get('/{contact}/edit', 'edit')->name('edit')->whereNumber('contact');
         Route::post('/store', 'store')->name('store');
