@@ -2,7 +2,7 @@
     "product"
 ])
 
-<div class="px-6 py-4 border-t last:rounded-bl-xl last:rounded-br-xl border-gray-100 hover:bg-gray-50 transition flex flex-col gap-3">
+<a href="{{ route('products.show', $product->id) }}" class="px-6 py-4 border-t last:rounded-bl-xl last:rounded-br-xl border-gray-100 hover:bg-gray-50 transition flex flex-col gap-3">
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1">
             <p class="text-gray-800 font-medium">{{ $product->name }}</p>
@@ -24,4 +24,4 @@
             {{ $product->amount }}
         </p>
     </div>
-</div>
+</a>
