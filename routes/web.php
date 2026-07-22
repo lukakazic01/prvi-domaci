@@ -8,7 +8,6 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
-
 Route::middleware('auth')->group(function () {
     Route::view('/about', 'about')->name('about');
 
