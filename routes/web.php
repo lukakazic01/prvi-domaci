@@ -25,7 +25,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
         Route::delete('/delete/{contact}', 'delete')->name('deleteContact')->whereNumber('contact');
     });
 
-    Route::controller(ProductController::class)->prefix('/product')->group(function () {
+    Route::controller(ProductController::class)->prefix('/products')->group(function () {
         Route::get('/add', 'addProduct')->name('addProduct');
         Route::get('/all', 'showProductsForAdmin')->name('allProducts');
         Route::get('/{product}/edit', 'edit')->name('editProduct')->whereNumber('product');
