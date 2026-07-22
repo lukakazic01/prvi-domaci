@@ -36,4 +36,8 @@ class ProductRepository
             'image' => $path ?: $product->image,
         ]);
     }
+
+    public function getTheLatestAddedProducts(int $limit) {
+        return $this->productModel->newQuery()->latest('products.id')->limit($limit)->get();
+    }
 }
