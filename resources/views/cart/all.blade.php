@@ -1,6 +1,11 @@
 <x-layout>
     <x-slot:title>Shopping Cart</x-slot:title>
-    <div class="container mx-auto">
+    <div class="container mx-auto flex flex-col gap-6">
+        @if($errors->has('cart'))
+            <x-base.notification type="error" class="text-center">
+                {{ $errors->first('cart') }}
+            </x-base.notification>
+        @endif
         <div class="flex flex-col gap-6">
             @forelse($products as $product)
                 <x-cart-item :product="$product" />

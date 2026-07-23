@@ -16,7 +16,7 @@ class OrderService
             $products = $shoppingCartRepository->fetchProductsBasedOnSession();
             if ($products->isEmpty()) {
                 throw ValidationException::withMessages([
-                    'cart' => ['Your shopping cart is empty.'],
+                    'cart' => 'Your shopping cart is empty.',
                 ]);
             }
             $products->each(function (Product $product) {
