@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -19,4 +20,8 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = ['name', 'price', 'description', 'amount', 'image'];
+
+    public function orderItems(): HasMany {
+        return $this->hasMany(OrderItem::class, 'product_id', 'id');
+    }
 }
