@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Repositories\ShoppingCartRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
-class OrderRepository
+class OrderService
 {
 
     public function placeAnOrder(ShoppingCartRepository $shoppingCartRepository): void {
