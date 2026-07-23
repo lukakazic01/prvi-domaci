@@ -14,12 +14,9 @@ class ShoppingCartController extends Controller
         return view('cart.all', compact('products'));
     }
     #[NoReturn]
-    public function add(CartAddRequest $request)
+    public function add(CartAddRequest $request, ShoppingCartRepository $shoppingCartRepository)
     {
-        session()->push('products', [
-            "product_id" => $request->id,
-            "amount" => $request->amount
-        ]);
+        $shoppingCartRepository->addProductToSession($request);
         return redirect()->route('cart.all');
     }
 

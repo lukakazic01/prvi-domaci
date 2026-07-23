@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\CartAddRequest;
 use App\Models\Product;
 use Illuminate\Container\EntryNotFoundException;
 use Illuminate\Contracts\Container\CircularDependencyException;
@@ -33,6 +34,17 @@ class ShoppingCartRepository
             return $product["product_id"] !== $productId;
         }));
         session()->put('products', $productsWithoutDeletedOne);
+    }
+
+    public function addProductToSession(CartAddRequest $request) {
+        $products = array_filter(session()->get('products', []), function($product) use ($request) {
+            return $product["product_id"] !== $request->id;
+        });
+        $products[] = [
+            "product_id" => $request->id,
+            "amount" => $request->amount
+        ];
+        session()->put("products", $products);
     }
 
 }
