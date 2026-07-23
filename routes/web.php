@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,8 @@ Route::controller(ShoppingCartController::class)->prefix('/cart')->name('cart.')
     Route::post("/add", 'add')->name('add');
     Route::delete("/delete/{id}", 'delete')->name('delete');
 });
+
+Route::post("/orders/create", [OrderController::class, 'create'])->middleware('auth')->name('orders.create');
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 

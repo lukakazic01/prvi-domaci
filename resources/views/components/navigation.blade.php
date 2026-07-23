@@ -57,13 +57,13 @@
             </div>
 
             <div class="flex items-center gap-3">
-                @guest
-                    <x-link active-class="text-blue-200" class="relative" :href="route('cart.all')" :active="request()->routeIs('cart.all')">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="absolute size-4 flex items-center justify-center text-[10px] -top-2 -right-2 bg-red-500 text-white rounded-full">
+                <x-link active-class="text-blue-200" class="relative" :href="route('cart.all')" :active="request()->routeIs('cart.all')">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="absolute size-4 flex items-center justify-center text-[10px] -top-2 -right-2 bg-red-500 text-white rounded-full">
                             {{ count(session()->get('products', [])) }}
                         </span>
-                    </x-link>
+                </x-link>
+                @guest
                     <x-link class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                             :href="route('login')" :active="request()->routeIs('login')">
                         Login
