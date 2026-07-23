@@ -10,7 +10,7 @@ class ShoppingCartController extends Controller
 {
 
     public function index() {
-        $productSession = session()->get('products');
+        $productSession = session()->get('products', []);
         $amounts = array_column($productSession, 'amount', 'product_id');
         $products = Product::query()
             ->whereIn('id', array_keys($amounts))

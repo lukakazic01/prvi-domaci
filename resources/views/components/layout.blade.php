@@ -6,9 +6,9 @@
     @vite('/resources/css/app.css')
 </head>
 <title>{{ $title ?? 'App' }}</title>
-<body>
+<body class="min-h-screen flex flex-col grow">
     <x-navigation />
-        <div class="p-4 pb-30">
+        <div class="p-4 pb-30 flex flex-col grow">
             {{ $slot }}
         </div>
     <x-footer />
