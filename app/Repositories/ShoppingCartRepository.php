@@ -35,9 +35,9 @@ class ShoppingCartRepository
 
     public function addProductToSession(CartAddRequest $request): void
     {
-        $products = array_filter(session()->get('products', []), function($product) use ($request) {
+        $products = array_values(array_filter(session()->get('products', []), function($product) use ($request) {
             return $product["product_id"] !== $request->id;
-        });
+        }));
         $products[] = [
             "product_id" => $request->id,
             "amount" => $request->amount
