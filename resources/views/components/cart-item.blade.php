@@ -25,17 +25,16 @@
         <p class="text-lg font-bold text-slate-900">
             ${{ $product->price * $product->quantity }}
         </p>
-
-        <form method="POST">
+        <form method="POST" action="{{ route('cart.delete', $product->id) }}">
             @csrf
+            @method('DELETE')
             <input type="hidden" name="id" value="{{ $product->id }}">
-            <button type="submit"
-                    class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                    aria-label="Remove item">
+            <x-base.button type="submit"
+                    class="p-1! text-red-400! bg-red-200 hover:bg-red-400 hover:text-red-600! rounded transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-            </button>
+            </x-base.button>
         </form>
     </div>
 </div>

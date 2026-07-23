@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartAddRequest;
-use App\Models\Product;
 use App\Repositories\ShoppingCartRepository;
 use JetBrains\PhpStorm\NoReturn;
 
@@ -22,6 +21,12 @@ class ShoppingCartController extends Controller
             "amount" => $request->amount
         ]);
         return redirect()->route('cart.all');
+    }
+
+    #[NoReturn]
+    public function delete(ShoppingCartRepository $shoppingCartRepository, string $id) {
+        $shoppingCartRepository->deleteProduct($id);
+        return redirect()->back();
     }
 
 }

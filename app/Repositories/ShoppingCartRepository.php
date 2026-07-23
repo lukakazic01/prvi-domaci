@@ -27,4 +27,12 @@ class ShoppingCartRepository
             });
     }
 
+    public function deleteProduct(string $productId) {
+        $products = session()->get('products', []);
+        $productsWithoutDeletedOne = array_values(array_filter($products, function($product) use ($productId) {
+            return $product["product_id"] !== $productId;
+        }));
+        session()->put('products', $productsWithoutDeletedOne);
+    }
+
 }
