@@ -5,27 +5,40 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\Product;
 use App\Repositories\ShoppingCartRepository;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class OrderService
 {
 
+    /**
+     * @param Collection<int, Product> $products
+     * @return void
+     */
+    private function validateProducts(Collection $products): void {
+        if ($products->isEmpty()) {
+            throw ValidationException::withMessages([
+                'cart' => 'Your shopping cart is empty.',
+            ]);
+        }
+        $products->each(function (Product $product) {
+            if ($product->quantity > $product->amount) {
+                throw ValidationException::withMessages([
+                    'cart' => "Product $product->name is out of stock"
+                ]);
+            }
+        });
+    }
+
+    /**
+     * @throws Throwable
+     */
     public function placeAnOrder(ShoppingCartRepository $shoppingCartRepository): void {
         DB::transaction(function () use ($shoppingCartRepository) {
             $products = $shoppingCartRepository->fetchProductsBasedOnSession();
-            if ($products->isEmpty()) {
-                throw ValidationException::withMessages([
-                    'cart' => 'Your shopping cart is empty.',
-                ]);
-            }
-            $products->each(function (Product $product) {
-                if ($product->quantity > $product->amount) {
-                    throw ValidationException::withMessages([
-                        'cart' => "Product $product->name is out of stock"
-                    ]);
-                }
-            });
+            $this->validateProducts($products);
             $totalPrice = $products->reduce(fn ($totalPrice, $product) => $totalPrice + ($product->price * $product->quantity), 0);
             $order = Order::query()->create([
                 'user_id' => auth()->id(),
